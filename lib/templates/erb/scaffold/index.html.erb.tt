@@ -44,7 +44,7 @@
                 <%%= link_to new_<%= singular_route_name %>, class: "btn btn-sm btn-neutral btn-round btn-icon" do %>
                           <%= icon("fas", "plus")%>
                           <span>New</span>
-                <% end %>
+                <%% end %>
               <%% end %>
             </div>
           </div>
