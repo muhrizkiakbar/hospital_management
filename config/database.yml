@@ -27,7 +27,7 @@ default: &default
 
   #akbar
   username: postgres
-  password: secret
+  password: ultraman
   host: 10.221.104.158
   port: 5432
   # For details on connection pooling, see Rails configuration guide
