@@ -1,0 +1,13 @@
+<%= form_with(model: user) do |form| %>
+  <%= render "error_messages", resource: form.object %>
+
+<div class="row">
+        <div class="col-md-6 flex justify-between items-center">
+        <%= form.button class: "btn btn-default" %>
+
+        <% if form.object.persisted? %>
+        <%= link_to 'Delete', form.object, class: "btn btn-default", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
+        <% end %>
+    </div>
+</div>
+<% end %>

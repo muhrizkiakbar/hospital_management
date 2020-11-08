@@ -1,0 +1,43 @@
+in:
+  faker:
+    
+    gender:
+      full:
+        - Pria
+        - Wanita
+
+
+    postal_code:
+      - 70712
+      - 70713
+      - 70714
+      - 70732
+      - 70734
+      - 70731
+      - 70721
+      - 70711
+
+    name:
+      # Existing faker field, new data
+      first_name:
+        - Charlotte
+        - Ava
+        - Chloe
+        - Emily
+
+      # New faker fields
+      ocker_first_name:
+        - Bazza
+        - Bluey
+        - Davo
+        - Johno
+        - Shano
+        - Shazza
+      region:
+        - South East Queensland
+        - Wide Bay Burnett
+        - Margaret River
+        - Port Pirie
+        - Gippsland
+        - Elizabeth
+        - Barossa
