@@ -3,3 +3,4 @@ class Department < ApplicationRecord
     has_many :child_id, foreign_key: "department_id", class_name: "department"
     belongs_to :parent_id, foreign_key: "department_id", class_name: "department"
 end
+
