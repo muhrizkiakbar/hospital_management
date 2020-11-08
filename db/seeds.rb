@@ -11,3 +11,7 @@ Dir[File.join(Rails.root, 'db', 'seeds/user', '*.rb')].sort.each do |seed|
     load seed
 end
 
+
+Dir[File.join(Rails.root, 'db', 'seeds/Department', '*.rb')].sort.each do |seed|
+    load seed
+end

@@ -27,11 +27,9 @@ ActiveRecord::Schema.define(version: 2020_11_08_080133) do
     t.string "path"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "department_id"
     t.string "slug"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_departments_on_deleted_at"
-    t.index ["department_id"], name: "index_departments_on_department_id"
     t.index ["slug"], name: "index_departments_on_slug", unique: true
   end
 
@@ -99,6 +97,5 @@ ActiveRecord::Schema.define(version: 2020_11_08_080133) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "departments", "departments", on_delete: :nullify
   add_foreign_key "users", "roles"
 end

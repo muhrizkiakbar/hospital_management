@@ -18,10 +18,10 @@
 #  date_birth             :date
 #  gender                 :string
 #  postal_code            :string
-#  address                :string
+#  address                :text
 #  rt_number              :string
 #  rw_number              :string
-#  medical_staff          :string
+#  medical_staff          :integer
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  locked_at              :datetime
