@@ -44,6 +44,7 @@ group :development do
   gem 'annotate'
   gem 'solargraph'
   gem 'dotenv-rails'
+  gem 'faker'
 end
 
 group :test do

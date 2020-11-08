@@ -1,0 +1,54 @@
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="row">
+            <div class="col-6">
+              <h3 class="mb-0">Permissions</h3>
+            </div>
+            <div class="col-6 text-right">
+              <% if @permissions.exists? %>
+                <%= link_to new_permission, class: "btn btn-sm btn-neutral btn-round btn-icon" do %>
+                          
+                          <span>New</span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flus">
+            <thead class="thead-light">
+              <tr>
+                                  <th scope="col" class="sort">Name</th>
+                                  <th scope="col" class="sort">Resource</th>
+                                  <th scope="col" class="sort">Action</th>
+                                  <th scope="col" class="sort">Description</th>
+                                  <th scope="col" class="sort">Page</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <% @permissions.each do |permission| %>
+                <tr>
+                                      <td><%= permission.name %></td>
+                                      <td><%= permission.resource %></td>
+                                      <td><%= permission.action %></td>
+                                      <td><%= permission.description %></td>
+                                      <td><%= permission.page %></td>
+                  
+                  <td>
+                    <%= link_to "View", permission, class: "btn btn-default" %>
+                    <%= link_to "Edit", edit_permission_path(permission), class: "btn btn-default" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

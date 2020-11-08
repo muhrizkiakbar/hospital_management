@@ -24,10 +24,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.date :date_birth
       t.string :gender
       t.string :postal_code
-      t.string :address
+      t.text :address
       t.string :rt_number
       t.string :rw_number
-      t.string :medical_staff
+      t.integer :medical_staff
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
