@@ -42,7 +42,7 @@
             <div class="col-6 text-right">
               <%% if @<%= plural_table_name %>.exists? %>
                 <%%= link_to new_<%= singular_route_name %>, class: "btn btn-sm btn-neutral btn-round btn-icon" do %>
-                          <%= icon("fas", "plus")%>
+                          <%# icon("fas", "plus")%>
                           <span>New</span>
                 <%% end %>
               <%% end %>
