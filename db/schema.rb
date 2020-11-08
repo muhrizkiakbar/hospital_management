@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_08_080133) do
+ActiveRecord::Schema.define(version: 2020_11_08_110838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 2020_11_08_080133) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_permissions_on_deleted_at"
     t.index ["slug"], name: "index_permissions_on_slug", unique: true
+  end
+
+  create_table "role_permissions", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.bigint "permission_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
+    t.index ["role_id"], name: "index_role_permissions_on_role_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -97,5 +106,8 @@ ActiveRecord::Schema.define(version: 2020_11_08_080133) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "departments", "departments", on_delete: :nullify
+  add_foreign_key "role_permissions", "permissions"
+  add_foreign_key "role_permissions", "roles"
   add_foreign_key "users", "roles"
 end
