@@ -1,0 +1,44 @@
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="row">
+            <div class="col-6">
+              <h3 class="mb-0">Users</h3>
+            </div>
+            <div class="col-6 text-right">
+              <% if @users.exists? %>
+                <%= link_to new_user, class: "btn btn-sm btn-neutral btn-round btn-icon" do %>
+                          
+                          <span>New</span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flus">
+            <thead class="thead-light">
+              <tr>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  
+                  <td>
+                    <%= link_to "View", user, class: "btn btn-default" %>
+                    <%= link_to "Edit", edit_user_path(user), class: "btn btn-default" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

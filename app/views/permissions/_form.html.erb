@@ -1,0 +1,38 @@
+<%= form_with(model: permission) do |form| %>
+  <%= render "error_messages", resource: form.object %>
+
+<div class="row">
+        <div class="col-md-6">
+            <%= form.label :name, class: "label" %>
+        <%= form.text_field :name, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :resource, class: "label" %>
+        <%= form.text_field :resource, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :action, class: "label" %>
+        <%= form.text_field :action, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :description, class: "label" %>
+        <%= form.text_area :description, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :page, class: "label" %>
+        <%= form.check_box :page, class: "input" %>
+        </div>
+
+        <div class="col-md-6 flex justify-between items-center">
+        <%= form.button class: "btn btn-default" %>
+
+        <% if form.object.persisted? %>
+        <%= link_to 'Delete', form.object, class: "btn btn-default", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
+        <% end %>
+    </div>
+</div>
+<% end %>
