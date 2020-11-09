@@ -1,9 +1,8 @@
-@import "stylesheets/nucleo/nucleo";
-@import "stylesheets/bootstrap/bootstrap.min";
-@import "stylesheets/@fortawesome/fontawesome-free/css/all.min";
-@import "stylesheets/select2/dist/css/select2.min";
-@import "stylesheets/sweetalert2/dist/sweetalert2.min";
-@import "stylesheets/animate.css/animate.min";
-@import "stylesheets/argon/argon";
-
-
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/v4-shims';
+@import 'argon';
+@import 'styles';

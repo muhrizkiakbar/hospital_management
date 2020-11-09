@@ -9,19 +9,21 @@ require("@rails/activestorage").start();
 require("channels");
 require("jquery");
 
-require("plugins/bootstrap/dist/js/bootstrap.bundle.min");
-require("plugins/jquery.scrollbar/jquery.scrollbar.min");
-require("plugins/jquery-scroll-lock/dist/jquery-scrollLock.min");
-require("plugins/js-cookie/js.cookie");
-require("plugins/list.js/dist/list.min");
-require("plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min");
-require("plugins/select2/dist/js/select2.min");
-require("plugins/sweetalert2/dist/sweetalert2.min");
-require("plugins/bootstrap-notify/bootstrap-notify.min");
+import 'bootstrap';
+require("js-cookie");
+require("jquery.scrollbar");
+require("jquery-scroll-lock");
+
+import './argon/argon';
+
+import '../stylesheets/application';
+import "@fortawesome/fontawesome-free/js/all";
+
+import './custom';
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
 //
-// const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)
+const images = require.context('../images', true)
+const imagePath = (name) => images(name, true)
