@@ -68,10 +68,8 @@ class User < ApplicationRecord
 
   validates :nip, :ktp, :first_name, :last_name, :academic_degree, :date_birth, :gender, :postal_code,
             :address, :rt_number, :rw_number, :medical_staff, presence: true
-  validates :first_name, :last_name, :gender, :medical_staff, :format => { :with => /\A[a-zA-Z]+\z/,
-                                                                           :message => "Only letters allowed." }
-  validates :nip,:ktp, :postal_code, :rt_number,:rw_number, :format => { :with => /^[0-9]*$/,
-                                                                           :message => "Only numbers allowed." }
+  validates :first_name, :last_name, :gender, :medical_staff, :format => { :with => /\A[a-zA-Z]+\z/, :message => "Only letters allowed." }
+  validates :nip,:ktp, :postal_code, :rt_number,:rw_number, :format => { :with => /\A[0-9]*\z/, :message => "Only numbers allowed." }
   validates :slug,     uniqueness: true
   validates :gender, inclusion: %w(male female)
 
