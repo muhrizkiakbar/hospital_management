@@ -1,0 +1,58 @@
+<%= form_with(model: department) do |form| %>
+  <%= render "error_messages", resource: form.object %>
+
+<div class="row">
+        <div class="col-md-6">
+            <%= form.label :name, class: "label" %>
+        <%= form.text_field :name, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :current_level, class: "label" %>
+        <%= form.number_field :current_level, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :level1, class: "label" %>
+        <%= form.number_field :level1, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :level2, class: "label" %>
+        <%= form.number_field :level2, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :level3, class: "label" %>
+        <%= form.number_field :level3, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :level4, class: "label" %>
+        <%= form.number_field :level4, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :level5, class: "label" %>
+        <%= form.number_field :level5, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :level6, class: "label" %>
+        <%= form.number_field :level6, class: "input" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= form.label :path, class: "label" %>
+        <%= form.text_field :path, class: "input" %>
+        </div>
+
+        <div class="col-md-6 flex justify-between items-center">
+        <%= form.button class: "btn btn-default" %>
+
+        <% if form.object.persisted? %>
+        <%= link_to 'Delete', form.object, class: "btn btn-default", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
+        <% end %>
+    </div>
+</div>
+<% end %>

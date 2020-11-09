@@ -62,7 +62,7 @@ class User < ApplicationRecord
 
   #validasi gasan penambahan user
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP } 
-  validates :username,:name, presence: :true, uniqueness: { case_sensitive: false }
+  validates :username, presence: :true, uniqueness: { case_sensitive: false }
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validate :validate_username
   
