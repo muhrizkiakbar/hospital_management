@@ -36,28 +36,28 @@ default: &default
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: postgres
+  username: postgres
 
   # The password associated with the postgres role (username).
-  #password: secret
+  password: secret
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  #host: pstgresql_db_1
+  host: pstgresql_db_1
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
-  #port: 5432
+  port: 5432
   #
   #
   #akbar
-  username: postgres
-  password: secret
-  password: ultraman
-  host: 10.221.104.158
-  host: 10.221.104.158
-  port: 5432
+  # username: postgres
+  # password: secret
+  # password: ultraman
+  # host: 10.221.104.158
+  # host: 10.221.104.158
+  # port: 5432
 
 development:
   <<: *default

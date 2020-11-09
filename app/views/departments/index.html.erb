@@ -1,7 +1,7 @@
     <h1 class="h2">Departments</h1>
 
     <% if @departments.exists? %>
-      <%= link_to 'New Department', new_department_path, class: "btn btn-default" %>
+      <%#= link_to 'New Department', new_department_path, class: "btn btn-default" %>
     <% end %>
 
   <% if @departments.exists? %>
@@ -55,10 +55,10 @@
             </div>
             <div class="col-6 text-right">
               <% if @departments.exists? %>
-                <%= link_to new_department, class: "btn btn-sm btn-neutral btn-round btn-icon" do %>
+                <%# link_to new_department, class: "btn btn-sm btn-neutral btn-round btn-icon" do %>
                           
                           <span>New</span>
-                <% end %>
+                <%# end %>
               <% end %>
             </div>
           </div>
@@ -93,8 +93,8 @@
                                       <td><%= department.path %></td>
                   
                   <td>
-                    <%= link_to "View", department, class: "btn btn-default" %>
-                    <%= link_to "Edit", edit_department_path(department), class: "btn btn-default" %>
+                    <%#= link_to "View", department, class: "btn btn-default" %>
+                    <%#= link_to "Edit", edit_department_path(department), class: "btn btn-default" %>
                   </td>
                 </tr>
               <% end %>
