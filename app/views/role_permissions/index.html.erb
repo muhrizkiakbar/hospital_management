@@ -1,44 +1,46 @@
+ <h1>Role Name</h1>
+<p><%= @role.name %></p>
 
-<div class="container-fluid mt--6">
-  <div class="row">
-    <div class="col">
-      <div class="card">
-        <div class="card-header border-0">
-          <div class="row">
-            <div class="col-6">
-              <h3 class="mb-0">Role Permissions</h3>
-            </div>
-            <div class="col-6 text-right">
-              <% if @role_permissions.exists? %>
-                <%= link_to new_role_permission, class: "btn btn-sm btn-neutral btn-round btn-icon" do %>
-                          
-                          <span>New</span>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <table class="table align-items-center table-flus">
-            <thead class="thead-light">
-              <tr>
-                
-              </tr>
-            </thead>
-            <tbody>
-              <% @role_permissions.each do |role_permission| %>
-                <tr>
-                  
-                  <td>
-                    <%= link_to "View", role_permission, class: "btn btn-default" %>
-                    <%= link_to "Edit", edit_role_permission_path(role_permission), class: "btn btn-default" %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+<%= form_for [@role,@role_permission] do |form| %>
+
+  <div class="actions">
+    <%= form.submit %>
   </div>
-</div>
+
+  <table>
+    <tbody>
+      <% @permissions.group_by(&:resource).each do |resource_of,value| %>
+        <tr>
+          <th colspan="7" style="text-align:left"> Resource : <%= resource_of %></th>
+        </tr>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Action</th>
+          <th>Page</th>
+          <th>Description</th>
+        </tr>
+        <% @permissions.where('resource = ?',resource_of).each do |resource_of_permission| %>
+          <tr>
+            <% if RolePermission.check_status(@role.id,resource_of_permission.id) %>
+              <td> <%= check_box("permissions", resource_of_permission.id, {checked: true}) %></td>
+            <% else %>
+              <td> <%= check_box("permissions", resource_of_permission.id, {checked: false}) %></td>
+            <% end %>  
+            <td><%= resource_of_permission.name %></td>
+            <td><%= resource_of_permission.action %></td>
+            <td><%= resource_of_permission.page %></td>
+            <td><%= resource_of_permission.description %></td>
+          </tr>
+        <% end %>
+
+            
+          
+
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
+<br>
+
