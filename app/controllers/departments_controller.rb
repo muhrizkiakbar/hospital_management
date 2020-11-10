@@ -15,7 +15,7 @@ class DepartmentsController < ApplicationController
   # GET /departments/new
   def new
     @department = Department.new
-    puts params[:parent]
+    @parent = params[:parent]
   end
 
   # GET /departments/1/edit

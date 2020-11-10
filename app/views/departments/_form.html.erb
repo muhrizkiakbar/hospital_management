@@ -1,4 +1,4 @@
-<%= form_with(model: department, class: "needs-validation", novalidate: "novalidate") do |form| %>
+<%= form_with(model: department, class: "needs-validation", url: departments_path(parent: @parent), novalidate: "novalidate") do |form| %>
   <%= render "error_messages", resource: form.object %>
 
 <div class="row">
