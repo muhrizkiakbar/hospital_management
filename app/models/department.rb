@@ -16,6 +16,7 @@
 #  updated_at    :datetime         not null
 #  slug          :string
 #  deleted_at    :datetime
+#  department_id :bigint
 #
 class Department < ApplicationRecord
     acts_as_paranoid

@@ -63,17 +63,13 @@
                     <td class="<%= department.attributes.keys[1] %>"><%= department.name %></td>
                     <% department.child_id.where(" current_level=2").each do |department2| %>
                       <%= department2.name%> <br>
-                      <td class="<%= department.attributes.keys[1] %>"><%= department.name %></td>
-                        <% department.child_id.where(" current_level=3").each do |department3| %>
+                        <% department2.child_id.where(" current_level=3").each do |department3| %>
                           <%= department3.name%> <br>
-                          <td class="<%= department.attributes.keys[1] %>"><%= department.name %></td>
-                            <% department.child_id.where(" current_level=4").each do |department4| %>
+                            <% department3.child_id.where(" current_level=4").each do |department4| %>
                               <%= department4.name%> <br>
-                              <td class="<%= department.attributes.keys[1] %>"><%= department.name %></td>
-                                <% department.child_id.where(" current_level=5").each do |department5| %>
+                                <% department4.child_id.where(" current_level=5").each do |department5| %>
                                   <%= department5.name%> <br>
-                                  <td class="<%= department.attributes.keys[1] %>"><%= department.name %></td>
-                                    <% department.child_id.where(" current_level=6").each do |department6| %>
+                                    <% department5.child_id.where(" current_level=6").each do |department6| %>
                                       <%= department6.name%> <br>
                                       
                                     <%end%>
