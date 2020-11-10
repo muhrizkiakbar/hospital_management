@@ -20,6 +20,9 @@
 #
 class Department < ApplicationRecord
     acts_as_paranoid
+
+    extend FriendlyId
+    friendly_id :slug_candidates, use: :slugged
     has_many :child_id, foreign_key: "department_id", class_name: "Department"
     belongs_to :parent_id, foreign_key: "department_id", class_name: "Department", optional: true
 end
