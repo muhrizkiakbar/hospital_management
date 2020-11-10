@@ -7,6 +7,7 @@ environment.plugins.prepend('Provide',
         $: 'jquery',
         jQuery: 'jquery',
         Cookies: 'jsCookies',
+        List: 'list.js',
         Popper: ['popper.js', 'default']
     })
 )
@@ -14,8 +15,8 @@ environment.plugins.prepend('Provide',
 const config = environment.toWebpackConfig();
 config.resolve.alias = {
     jquery: 'jquery/src/jquery',
-    jsCookies: 'js-cookie/src/js.cookie'
+    jsCookies: 'js-cookie/src/js.cookie',
+    // listjs: 'list.js/dist/list'
 }
 
 module.exports = environment
-

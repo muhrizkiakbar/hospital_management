@@ -1,0 +1,5 @@
+@include media-breakpoint-between(lg, xl) {
+    input[type="number"].text-right::-webkit-inner-spin-button {
+        margin-left: 10px;
+    }
+}
