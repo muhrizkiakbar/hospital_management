@@ -154,7 +154,7 @@ datas = [
 
                 #pengisian level dan path
                 set_level3 = Department.find(add_level3.id)
-                set_level3.parent_id = add_level1
+                set_level3.parent_id = add_level2
                 set_level3.level1 = add_level1.id.to_s
                 set_level3.level2 = add_level2.id.to_s
                 set_level3.path =add_level1.id.to_s + "," + add_level2.id.to_s + "," + add_level3.id.to_s 
@@ -175,7 +175,7 @@ datas = [
           
                       #pengisian level dan path
                       set_level4 = Department.find(add_level4.id)
-                      set_level4.parent_id = add_level1
+                      set_level4.parent_id = add_level3
                       set_level4.level1 = add_level1.id.to_s
                       set_level4.level2 = add_level2.id.to_s
                       set_level4.level3 = add_level3.id.to_s
@@ -197,7 +197,7 @@ datas = [
                 
                             #pengisian level dan path
                             set_level5 = Department.find(add_level5.id)
-                            set_level5.parent_id = add_level1
+                            set_level5.parent_id = add_level4
                             set_level5.level1 = add_level1.id.to_s
                             set_level5.level2 = add_level2.id.to_s
                             set_level5.level3 = add_level3.id.to_s
@@ -220,7 +220,7 @@ datas = [
                       
                                   #pengisian level dan path
                                   set_level6 = Department.find(add_level6.id)
-                                  set_level6.parent_id = add_level1
+                                  set_level6.parent_id = add_level5
                                   set_level6.level1 = add_level1.id.to_s
                                   set_level6.level2 = add_level2.id.to_s
                                   set_level6.level3 = add_level3.id.to_s
