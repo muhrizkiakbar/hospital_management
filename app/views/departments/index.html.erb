@@ -1,105 +1,91 @@
-    <h1 class="h2">Departments</h1>
 
-    <% if @departments.exists? %>
-      <%#= link_to 'New Department', new_department_path, class: "btn btn-default" %>
-    <% end %>
-
-  <% if @departments.exists? %>
-                            <th class="p-3 uppercase text-left text-xs text-gray-700">Name</th>
-                            <th class="p-3 uppercase text-left text-xs text-gray-700">Current level</th>
-                            <th class="p-3 uppercase text-left text-xs text-gray-700">Level1</th>
-                            <th class="p-3 uppercase text-left text-xs text-gray-700">Level2</th>
-                            <th class="p-3 uppercase text-left text-xs text-gray-700">Level3</th>
-                            <th class="p-3 uppercase text-left text-xs text-gray-700">Level4</th>
-                            <th class="p-3 uppercase text-left text-xs text-gray-700">Level5</th>
-                            <th class="p-3 uppercase text-left text-xs text-gray-700">Level6</th>
-                            <th class="p-3 uppercase text-left text-xs text-gray-700">Path</th>
-        
-        <% @departments.each do |department| %>
-          <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                          <td class="p-3"><%= department.name %></td>
-                          <td class="p-3"><%= department.current_level %></td>
-                          <td class="p-3"><%= department.level1 %></td>
-                          <td class="p-3"><%= department.level2 %></td>
-                          <td class="p-3"><%= department.level3 %></td>
-                          <td class="p-3"><%= department.level4 %></td>
-                          <td class="p-3"><%= department.level5 %></td>
-                          <td class="p-3"><%= department.level6 %></td>
-                          <td class="p-3"><%= department.path %></td>
-            
-            <td>
-              <%= link_to "View", department, class: "btn btn-default" %>
-              <%= link_to "Edit", edit_department_path(department), class: "btn btn-default" %>
-            </td>
-          </tr>
-        <% end %>
-
-  <% else %>
-    <div class="bg-white rounded shadow flex items-center justify-between p-8">
-      <div class="flex-1 text-center">
-        <p class="text-xl font-semibold mb-4">Create your first Department</p>
-      <%= link_to 'New Department', new_department_path, class: "btn btn-default" %>
+<!-- Add this to add search form -->
+<% content_for :search_form do %>
+  <!-- Search form -->
+  <!-- Add Class searchList on input element to enable search with List.js -->
+  <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+  <div class="form-group mb-0">
+      <div class="input-group input-group-alternative input-group-merge">
+      <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
       </div>
-    </div>
+      <input class="form-control searchList" placeholder="Search" type="text">
+      </div>
+  </div>
+  <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+      <span aria-hidden="true">×</span>
+  </button>
+  </form>
+<% end %>
+<% content_for :search_show do  %>
+  <li class="nav-item d-sm-none">
+      <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
+      <i class="ni ni-zoom-split-in"></i>
+      </a>
+  </li>
+<% end %>
+<!-- -->
+
+<% content_for :header_title do %>
+  <%= controller_name.capitalize() %>
+<% end %>
+
+<% if @departments.exists? %>
+  <% content_for :new_button do %>
+    <%= link_to 'New', new_department_path, class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
   <% end %>
-</div>
+<% end %>
 
 <div class="container-fluid mt--6">
   <div class="row">
     <div class="col">
       <div class="card">
-        <div class="card-header border-0">
-          <div class="row">
-            <div class="col-6">
-              <h3 class="mb-0">Departments</h3>
-            </div>
-            <div class="col-6 text-right">
-              <% if @departments.exists? %>
-                <%# link_to new_department, class: "btn btn-sm btn-neutral btn-round btn-icon" do %>
-                          
-                          <span>New</span>
-                <%# end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <table class="table align-items-center table-flus">
-            <thead class="thead-light">
-              <tr>
-                                  <th scope="col" class="sort">Name</th>
-                                  <th scope="col" class="sort">Current level</th>
-                                  <th scope="col" class="sort">Level1</th>
-                                  <th scope="col" class="sort">Level2</th>
-                                  <th scope="col" class="sort">Level3</th>
-                                  <th scope="col" class="sort">Level4</th>
-                                  <th scope="col" class="sort">Level5</th>
-                                  <th scope="col" class="sort">Level6</th>
-                                  <th scope="col" class="sort">Path</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              <% @departments.each do |department| %>
+        <div class="card-body p-0">
+          <% if @departments.exists? %>
+          <div  class="table-responsive"
+                data-toggle="list"
+                data-list-values='[<% (1..(@departments.first.attributes.length - 6)).each do |v| %>"<%= @departments.first.attributes.keys[v] %>"<%= (v==@departments.first.attributes.length - 6) ? "" : "," %><% end %>]'>
+            <input type="hidden" class="search" />
+            <table class="table align-items-center table-flush table-striped">
+              <thead class="thead-light">
                 <tr>
-                                      <td><%= department.name %></td>
-                                      <td><%= department.current_level %></td>
-                                      <td><%= department.level1 %></td>
-                                      <td><%= department.level2 %></td>
-                                      <td><%= department.level3 %></td>
-                                      <td><%= department.level4 %></td>
-                                      <td><%= department.level5 %></td>
-                                      <td><%= department.level6 %></td>
-                                      <td><%= department.path %></td>
-                  
-                  <td>
-                    <%#= link_to "View", department, class: "btn btn-default" %>
-                    <%#= link_to "Edit", edit_department_path(department), class: "btn btn-default" %>
-                  </td>
+                  <% (1..(@departments.first.attributes.length - 6)).each do |v| %>
+                      <th scope="col" class="sort" data-sort="<%= @departments.first.attributes.keys[v] %>">
+                        <%= @departments.first.attributes.keys[v].sub('_', ' ') %>
+                      </th>
+                  <% end %>
+                  <th></th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+              <tbody class="list">
+                <% @departments.each do |department| %>
+                  <tr>
+                    <td class="<%= department.attributes.keys[1] %>"><%= department.name %></td>
+                    <td class="text-right <%= department.attributes.keys[2] %>"><%= department.current_level %></td>
+                    <td class="text-right <%= department.attributes.keys[3] %>"><%= department.level1 %></td>
+                    <td class="text-right <%= department.attributes.keys[4] %>"><%= department.level2 %></td>
+                    <td class="text-right <%= department.attributes.keys[5] %>"><%= department.level3 %></td>
+                    <td class="text-right <%= department.attributes.keys[6] %>"><%= department.level4 %></td>
+                    <td class="text-right <%= department.attributes.keys[7] %>"><%= department.level5 %></td>
+                    <td class="text-right <%= department.attributes.keys[8] %>"><%= department.level6 %></td>
+                    <td class="text-left <%= department.attributes.keys[9] %>"><%= department.path %></td>
+                    <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" style="">
+                          <%= link_to "Detail", department, class: "dropdown-item", data: { turbolinks: 'false' } %>
+                          <%= link_to "Edit", edit_department_path(department), class: "dropdown-item" %>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <% end %>
         </div>
       </div>
     </div>

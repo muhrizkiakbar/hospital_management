@@ -1,25 +1,12 @@
-<nav class="navbar navbar-top navbar-expand navbar-light bg-secondary border-bottom">
+<nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Search form -->
-            <form class="navbar-search navbar-search-dark form-inline mr-sm-3" id="navbar-search-main">
-            <div class="form-group mb-0">
-                <div class="input-group input-group-alternative input-group-merge">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-search"></i></span>
-                </div>
-                <input class="form-control" placeholder="Search" type="text">
-                </div>
-            </div>
-            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-            </form>
+            <%= yield :search_form %>
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
                 <!-- Sidenav toggler -->
-                <div class="pr-3 sidenav-toggler sidenav-toggler-light" data-action="sidenav-pin" data-target="#sidenav-main">
+                <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
                 <div class="sidenav-toggler-inner">
                     <i class="sidenav-toggler-line"></i>
                     <i class="sidenav-toggler-line"></i>
@@ -27,11 +14,7 @@
                 </div>
                 </div>
             </li>
-            <li class="nav-item d-sm-none">
-                <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                <i class="ni ni-zoom-split-in"></i>
-                </a>
-            </li>
+            <%= yield :search_show %>
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="ni ni-bell-55"></i>
@@ -47,7 +30,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="../../assets/img/theme/team-1.jpg" class="avatar rounded-circle">
+                        <%= image_pack_tag 'img/theme/team-1.jpg', alt: "Image placeholder", class: "avatar rounded-circle" %>
                         </div>
                         <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -66,7 +49,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="../../assets/img/theme/team-2.jpg" class="avatar rounded-circle">
+                        <%= image_pack_tag 'img/theme/team-2.jpg', alt: "Image placeholder", class: "avatar rounded-circle" %>
                         </div>
                         <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -85,8 +68,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="../../assets/img/theme/team-3.jpg" class="avatar rounded-circle">
-                        </div>
+                        <%= image_pack_tag 'img/theme/team-3.jpg', alt: "Image placeholder", class: "avatar rounded-circle" %>                        </div>
                         <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
@@ -104,7 +86,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="../../assets/img/theme/team-4.jpg" class="avatar rounded-circle">
+                        <%= image_pack_tag 'img/theme/team-4.jpg', alt: "Image placeholder", class: "avatar rounded-circle" %>
                         </div>
                         <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -123,7 +105,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="../../assets/img/theme/team-5.jpg" class="avatar rounded-circle">
+                        <%= image_pack_tag 'img/theme/team-5.jpg', alt: "Image placeholder", class: "avatar rounded-circle" %>
                         </div>
                         <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -147,7 +129,7 @@
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="ni ni-ungroup"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-light bg-white  dropdown-menu-right ">
                 <div class="row shortcuts px-4">
                     <a href="#!" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-red">
@@ -194,7 +176,7 @@
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                     <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="../../assets/img/theme/team-4.jpg">
+                    <%= image_pack_tag 'img/theme/team-4.jpg', alt: "Image placeholder" %>
                     </span>
                     <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">John Snow</span>

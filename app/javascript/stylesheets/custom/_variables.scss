@@ -8,6 +8,12 @@
 
 // Global settings
 
+// Color Palette Green Custom
+// primary: #68b0ab
+// secondary: #8fc0a9
+// third: #c8d5b9
+// fourth: #faf3dd
+
 $enable-caret:              true !default;
 $enable-rounded:            true !default;
 $enable-gradients:          false !default;
@@ -80,8 +86,10 @@ $colors: map-merge((
 ), $colors);
 
 $default:       #172b4d !default;
-$primary:       #5e72e4 !default;
-$secondary:     #f7fafc !default;
+// $primary:       #5e72e4 !default;
+$primary:       #68b0ab !default;
+// $secondary:     #f7fafc !default;
+$secondary:     #8fc0a9 !default;
 $success:       $green !default;
 $info:          $teal !default;
 $warning:       $orange !default;
@@ -133,7 +141,8 @@ $brand-colors: map-merge((
 $shape-colors: () !default;
 $shape-colors: map-merge((
   "default":      #32325d,
-  "primary":      #5533ff,
+  // "primary":      #5533ff,
+  "primary":      #68b0ab,
   "secondary":    #24b47e,
   "neutral":      #e9ecef,
   "blue-gray":    #b2cbe1,

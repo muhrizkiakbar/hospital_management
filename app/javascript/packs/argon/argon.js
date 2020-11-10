@@ -2407,6 +2407,7 @@ $(document).on('turbolinks:load', function() {
 
 		var $lists = $('[data-toggle="list"]');
 		var $listsSort = $('[data-sort]');
+		var $searchList = $('input.searchList');
 
 
 		//
@@ -2414,8 +2415,12 @@ $(document).on('turbolinks:load', function() {
 		//
 
 		// Init
-		function init($list) {
-			new List($list.get(0), getOptions($list));
+		function init($list, $search) {
+			var listObj = new List($list.get(0), getOptions($list));
+			$search.on('keyup', function() {
+				var searchString = $(this).val();
+				listObj.search(searchString);
+			});
 		}
 
 		// Get options
@@ -2436,7 +2441,7 @@ $(document).on('turbolinks:load', function() {
 		// Init
 		if ($lists.length) {
 			$lists.each(function() {
-				init($(this));
+				init($(this), $searchList);
 			});
 		}
 
