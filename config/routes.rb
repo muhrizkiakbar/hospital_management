@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   
-  # resources :permissions
+  resources :permissions
   resources :roles, except: [:show] do
     resources :role_permissions, only: [:index, :create]
   end
