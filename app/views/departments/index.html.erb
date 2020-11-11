@@ -61,7 +61,7 @@
                 <% @departments.each do |department| %>
                   <tr>
                     <td class="<%= department.attributes.keys[1] %>"><%= department.name %></td>
-                    <%= link_to 'New', new_department_path(parent: department.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'true' } %>
+                    <%= link_to 'New', new_department_path(parent: department.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
                     <% department.child_id.where(" current_level=2").each do |department2| %>
                       <%= department2.name%> <br>
                       <%= link_to 'New', new_department_path(parent: department2.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
