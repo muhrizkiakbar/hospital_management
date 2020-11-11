@@ -1,6 +1,8 @@
 class RolesController < ApplicationController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
+  breadcrumb 'All Roles', :roles_path, only: [:new, :create, :edit, :update]
+
   # GET /roles
   # GET /roles.json
   def index

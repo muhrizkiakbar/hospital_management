@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   #before_action :authenticate_user!
 
+  breadcrumb 'Home', :root_path
+
     #include Pundit
     #protect_from_forgery # sebelumnya
     #protect_from_forgery prepend: true

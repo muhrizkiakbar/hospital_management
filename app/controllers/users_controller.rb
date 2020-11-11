@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :allow_without_password, only: [:update, :update_profile]
   before_action :set_request_foreign, only: [:create, :update]
 
+  breadcrumb 'All Users', :users_path, only: [:new, :create, :edit, :update]
+
 
   # GET /users
   # GET /users.json
