@@ -57,7 +57,7 @@ class User < ApplicationRecord
 
   # pakai gem paperclip gasan meupload gambar
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/default_user.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  validates_attachment_content_type :avatar, content_type: ["image/jpeg", "image/gif", "image/png"] 
   validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 1.megabytes
 
   #validasi gasan penambahan user

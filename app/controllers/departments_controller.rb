@@ -4,7 +4,7 @@ class DepartmentsController < ApplicationController
   # GET /departments
   # GET /departments.json
   def index
-    @departments = Department.all
+    @departments = Department.where(" current_level =1")
   end
 
   # GET /departments/1
@@ -15,6 +15,7 @@ class DepartmentsController < ApplicationController
   # GET /departments/new
   def new
     @department = Department.new
+    @parent = params[:parent]
   end
 
   # GET /departments/1/edit
@@ -25,9 +26,73 @@ class DepartmentsController < ApplicationController
   # POST /departments.json
   def create
     @department = Department.new(department_params)
+    if params[:parent].exist?
+
+      @parent_deparment = Department.friendly.find(params[:parent])
+      if !(@parent_deparment)
+        respond_to do |format|
+          format.html { render :new }
+          format.json { render json: 'Error, not found parent of this department.', status: :unprocessable_entity }
+        end
+      end
+    end
+        
 
     respond_to do |format|
       if @department.save
+
+        if params[:parent].exist?
+
+          @parent_deparment = Department.friendly.find(params[:parent])
+
+          @department.current_level = @parent_deparment.current_level + 1
+          
+          case @department.current_level
+          when 1
+            @department.level1 = @department.id
+            @department.path = @department.id.to_s
+          when 2
+            @department.level1 = @parent_deparment.level1
+            @department.level2 = @department.id
+            @department.path = @parent_deparment.path + @department.id
+          when 3
+            @department.level1 = @parent_deparment.level1
+            @department.level2 = @parent_deparment.level2
+            @department.level3 = @department.id
+            @department.path = @parent_deparment.path + @department.id
+          when 4
+            @department.level1 = @parent_deparment.level1
+            @department.level2 = @parent_deparment.level2
+            @department.level3 = @parent_deparment.level3
+            @department.level4 = @department.id
+            @department.path = @parent_deparment.path + @department.id
+          when 5
+            @department.level1 = @parent_deparment.level1
+            @department.level2 = @parent_deparment.level2
+            @department.level3 = @parent_deparment.level3
+            @department.level4 = @parent_deparment.level4
+            @department.level5 = @department.id
+            @department.path = @parent_deparment.path + @department.id
+          when 6
+            @department.level1 = @parent_deparment.level1
+            @department.level2 = @parent_deparment.level2
+            @department.level3 = @parent_deparment.level3
+            @department.level4 = @parent_deparment.level4
+            @department.level5 = @parent_deparment.level5
+            @department.level6 = @department.id
+            @department.path = @parent_deparment.path + @department.id
+          else
+            @department.level1 = @department.id
+            @department.path = @department.id.to_s
+          end
+
+        else
+
+          @department.current_level = 1
+          @department.level1 = 1
+          @department.path = "1"
+
+        end
         format.html { redirect_to @department, notice: 'Department was successfully created.' }
         format.json { render :show, status: :created, location: @department }
       else
@@ -67,8 +132,11 @@ class DepartmentsController < ApplicationController
       @department = Department.find(params[:id])
     end
 
+    def get_path(department)
+    end
+
     # Only allow a list of trusted parameters through.
     def department_params
-      params.require(:department).permit(:name, :current_level, :level1, :level2, :level3, :level4, :level5, :level6, :path)
+      params.require(:department).permit(:name)
     end
 end

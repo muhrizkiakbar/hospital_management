@@ -67,5 +67,6 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'paperclip'
 gem 'font-awesome-sass', '~> 5.15.1'
+gem 'loaf'
 
 gem 'devise'

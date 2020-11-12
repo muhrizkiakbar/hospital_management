@@ -130,6 +130,8 @@ GEM
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    loaf (0.9.0)
+      rails (>= 3.2)
     loofah (2.7.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -323,6 +325,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   listen (~> 3.2)
+  loaf
   paperclip
   paranoia
   pg (>= 0.18, < 2.0)

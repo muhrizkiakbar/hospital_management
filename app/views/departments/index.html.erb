@@ -58,6 +58,28 @@
                 <% @departments.each do |department| %>
                   <tr>
                     <td class="<%= department.attributes.keys[1] %>"><%= department.name %></td>
+                    <%= link_to 'New', new_department_path(parent: department.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
+                    <% department.child_id.where(" current_level=2").each do |department2| %>
+                      <%= department2.name%> <br>
+                      <%= link_to 'New', new_department_path(parent: department2.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
+                        <% department2.child_id.where(" current_level=3").each do |department3| %>
+                          <%= department3.name%> <br>
+                            <%= link_to 'New', new_department_path(parent: department3.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
+                            <% department3.child_id.where(" current_level=4").each do |department4| %>
+                              <%= department4.name%> <br>
+                              <%= link_to 'New', new_department_path(parent: department4.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
+                                <% department4.child_id.where(" current_level=5").each do |department5| %>
+                                  <%= department5.name%> <br>
+                                  <%= link_to 'New', new_department_path(parent: department5.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
+                                    <% department5.child_id.where(" current_level=6").each do |department6| %>
+                                      <%= department6.name%> <br>
+                                      <%= link_to 'New', new_department_path(parent: department6.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
+                                      
+                                    <%end%>
+                                <%end%>
+                            <%end%>
+                        <%end%>
+                    <%end%>
                     <td class="text-right <%= department.attributes.keys[2] %>"><%= department.current_level %></td>
                     <td class="text-right <%= department.attributes.keys[3] %>"><%= department.level1 %></td>
                     <td class="text-right <%= department.attributes.keys[4] %>"><%= department.level2 %></td>
@@ -71,9 +93,10 @@
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <%= link_to "Detail", department, class: "dropdown-item link", data: { turbolinks: 'false' } %>
-                          <%= link_to "Edit", edit_department_path(department), class: "dropdown-item link" %>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" style="">
+                          <%= link_to "Detail", department, class: "dropdown-item", data: { turbolinks: 'false' } %>
+                          <%= link_to "Edit", edit_department_path(department), class: "dropdown-item" %>
+                          <%= link_to "Show", department_path(department), class: "dropdown-item" %>
                         </div>
                       </div>
                     </td>

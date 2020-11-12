@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :allow_without_password, only: [:update, :update_profile]
   before_action :set_request_foreign, only: [:create, :update]
 
+  breadcrumb 'All Users', :users_path, only: [:new, :create, :edit, :update]
+
 
   # GET /users
   # GET /users.json
@@ -115,7 +117,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :username, :nip, :ktp, :honorific, :first_name, :last_name, :academic_degree,:date_birth,:gender,:postal_code,:address,:rt_number,:rw_number,:medical_staff,:password, :password_confirmation)
+      params.require(:user).permit(:email, :username, :nip, :ktp, :honorific,:avatar, :first_name, :last_name, :academic_degree,:date_birth,:gender,:postal_code,:address,:rt_number,:rw_number,:medical_staff,:password, :password_confirmation)
     end
 
     def allow_without_password
