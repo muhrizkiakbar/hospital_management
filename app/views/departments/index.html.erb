@@ -42,11 +42,8 @@
       <div class="card">
         <div class="card-body p-0">
           <% if @departments.exists? %>
-          <div  class="table-responsive"
-                data-toggle="list"
-                data-list-values='[<% (1..(@departments.first.attributes.length - 6)).each do |v| %>"<%= @departments.first.attributes.keys[v] %>"<%= (v==@departments.first.attributes.length - 6) ? "" : "," %><% end %>]'>
-            <input type="hidden" class="search" />
-            <table class="table align-items-center table-flush table-striped">
+          <div class="table-responsive sortList" data-list-values='[<% (1..(@departments.first.attributes.length - 6)).each do |v| %>"<%= @departments.first.attributes.keys[v] %>"<%= (v==@departments.first.attributes.length - 6) ? "" : "," %><% end %>]'>
+            <table class="table">
               <thead class="thead-light">
                 <tr>
                   <% (1..(@departments.first.attributes.length - 6)).each do |v| %>
@@ -74,9 +71,9 @@
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" style="">
-                          <%= link_to "Detail", department, class: "dropdown-item", data: { turbolinks: 'false' } %>
-                          <%= link_to "Edit", edit_department_path(department), class: "dropdown-item" %>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <%= link_to "Detail", department, class: "dropdown-item link", data: { turbolinks: 'false' } %>
+                          <%= link_to "Edit", edit_department_path(department), class: "dropdown-item link" %>
                         </div>
                       </div>
                     </td>

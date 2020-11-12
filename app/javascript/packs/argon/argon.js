@@ -2405,11 +2405,12 @@ $(document).on('turbolinks:load', function() {
 		// Variables
 		//  //
 
-		var $lists = $('[data-toggle="list"]');
+		var $lists = $('.sortList');
 		var $listsSort = $('[data-sort]');
 		var $searchList = $('input.searchList');
 
-
+		console.log($lists);
+		console.log($listsSort);
 		//
 		// Methods
 		//
