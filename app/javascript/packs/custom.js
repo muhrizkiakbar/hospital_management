@@ -27,3 +27,12 @@ $(document).on("turbolinks:load", function () {
     );
   })();
 });
+
+$(document).on("turbolinks:load", function () {
+  $('a[data-toggle="collapse"][data-page="department"][role="button"][aria-expanded="false"]').on('click', function(e) { 
+    $(this).text(function(i, v) {
+      return v === 'Show' ? 'Hide' : 'Show';
+    })
+    
+  })
+});

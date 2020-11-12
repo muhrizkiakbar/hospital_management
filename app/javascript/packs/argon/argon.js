@@ -2408,9 +2408,7 @@ $(document).on('turbolinks:load', function() {
 		var $lists = $('.sortList');
 		var $listsSort = $('[data-sort]');
 		var $searchList = $('input.searchList');
-
-		console.log($lists);
-		console.log($listsSort);
+		
 		//
 		// Methods
 		//
