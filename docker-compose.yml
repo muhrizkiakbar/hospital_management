@@ -1,0 +1,28 @@
+version: '3'
+networks:
+  db_networks:
+    driver: bridge
+services:
+  postgresdb:
+    container_name: 'postgresql'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    image: postgres
+    networks:
+      - db_networks
+
+  pg_admin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    volumes:
+      - ./data:/var/lib/pgadmin/data
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - db_networks
+    restart: unless-stopped
