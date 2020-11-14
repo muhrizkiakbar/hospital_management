@@ -1,29 +1,36 @@
-<%%= form_with(model: <%= model_resource_name %>) do |form| %>
+<%%= form_with(model: <%= model_resource_name %>, class: "needs-validation", novalidate: "novalidate") do |form| %>
   <%%= render "error_messages", resource: form.object %>
 
 <div class="row">
     <% attributes.each do |attribute| -%>
     <div class="col-md-6">
-    <% if attribute.password_digest? -%>
-        <%%= form.label :password, class: "label" %>
-        <%%= form.password_field :password, class: "input" %>
+        <div class="form-group row">
+        <% if attribute.password_digest? -%>
+            <%%= form.label :password, class: "label" %>
+            <%%= form.password_field :password, class: "input" %>
+        </div>
     </div>
-
     <div class="col-md-6">
-        <%%= form.label :password_confirmation, class: "label" %>
-        <%%= form.password_field :password_confirmation, class: "input" %>
-    <% else -%>
-        <%%= form.label :<%= attribute.column_name %>, class: "label" %>
-        <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "input" %>
-    <% end -%>
+        <div class="form-group row">
+            <%%= form.label :password_confirmation, class: "label" %>
+            <%%= form.password_field :password_confirmation, class: "input" %>
+        <% else -%>
+            <%%= form.label :<%= attribute.column_name %>, class: "label" %>
+            <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "input" %>
+        <% end -%>
+        </div>
     </div>
-
     <% end -%>
-    <div class="col-md-6 flex justify-between items-center">
-        <%%= form.button class: "btn btn-default" %>
+</div>
+<div class="row align-items-center">
+    <div class="col-lg-6 col-6">
+        <%%= content_for?(:back_button) ? yield(:back_button) : '' %>
+    </div>
+    <div class="col-lg-6 col-6 text-right">
+        <%%= submit_tag "Create", class: "btn btn-primary text-right", formnovalidate: true %>
 
         <%% if form.object.persisted? %>
-        <%%= link_to 'Delete', form.object, class: "btn btn-default", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
+            <%%= link_to 'Delete', form.object, class: "btn btn-default", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
         <%% end %>
     </div>
 </div>

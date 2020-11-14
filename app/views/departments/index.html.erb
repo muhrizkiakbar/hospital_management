@@ -32,7 +32,8 @@
 
 <% if @departments.exists? %>
   <% content_for :new_button do %>
-    <%= link_to 'New', new_department_path, class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
+    <%= link_to 'New', new_department_path, class: "btn btn-sm btn-primary", data: { turbolinks: 'false' } %>
+    <%= link_to 'New Modal', new_department_path, remote: true, class: "btn btn-sm btn-primary", data: { toggle: 'modal', target: "#department-modal" } %>
   <% end %>
 <% end %>
 
@@ -41,14 +42,27 @@
     <div class="col">
       <div class="card">
         <div class="card-header">
-          <h5 class="h3 mb-0"><%= controller_name.capitalize() %></h5>
+          <div class="row justify-content-between align-items-center">
+            <div class="col">
+              <h5 class="h3 mb-0"><%= controller_name.capitalize() %></h5>
+            </div>
+            <div class="col-auto">
+              <div class="d-flex align-items-center">
+                <small class="text-primary font-weight-bold mr-3">Show All</small>
+                <label class="custom-toggle custom-toggle-primary">
+                  <input type="checkbox" id="showAll">
+                  <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush list my--3">
             <% if @departments.exists? %>
               <!-- Department1 -->
               <% @departments.each do |department| %>
-                <li class="list-group-item px-0">
+                <li class="list-group-item px-0 department-group">
                   <div class="row align-items-center">
                     <div class="col">
                       <h4 class="mb-0">
@@ -82,7 +96,7 @@
                     <ul class="list-group list-group-flush list mb-0">
                       <!-- Department2 -->
                       <% department.child_id.where("current_level=2").each do |department2| %>
-                      <li class="list-group-item px-0">
+                      <li class="list-group-item px-0 department-group">
                         <div class="row align-items-center">
                           <div class="col">
                             <h4 class="mb-0">
@@ -116,7 +130,7 @@
                           <ul class="list-group list-group-flush list mb-0">
                             <!-- Department3 -->
                             <% department2.child_id.where("current_level=3").each do |department3| %>
-                            <li class="list-group-item px-0">
+                            <li class="list-group-item px-0 department-group">
                               <div class="row align-items-center">
                                 <div class="col">
                                   <h4 class="mb-0">
@@ -150,7 +164,7 @@
                                 <ul class="list-group list-group-flush list mb-0">
                                   <!-- Department4 -->
                                   <% department3.child_id.where("current_level=4").each do |department4| %>
-                                  <li class="list-group-item px-0">
+                                  <li class="list-group-item px-0 department-group">
                                     <div class="row align-items-center">
                                       <div class="col">
                                         <h4 class="mb-0">
@@ -184,7 +198,7 @@
                                       <ul class="list-group list-group-flush list mb-0">
                                         <!-- Department5 -->
                                         <% department4.child_id.where("current_level=5").each do |department5| %>
-                                        <li class="list-group-item px-0">
+                                        <li class="list-group-item px-0 department-group">
                                           <div class="row align-items-center">
                                             <div class="col">
                                               <h4 class="mb-0">
@@ -218,7 +232,7 @@
                                             <ul class="list-group list-group-flush list mb-0">
                                               <!-- Department6 -->
                                               <% department5.child_id.where("current_level=6").each do |department6| %>
-                                              <li class="list-group-item px-0">
+                                              <li class="list-group-item px-0 department-group">
                                                 <div class="row align-items-center">
                                                   <div class="col">
                                                     <h4 class="mb-0">
@@ -264,6 +278,15 @@
           </ul>
         </div>
       </div>
+    </div>
+  </div>
+
+  
+</div>
+
+<div class="modal fade" id="department-modal" tabindex="-1" role="dialog" aria-labeledby="department-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
     </div>
   </div>
 </div>

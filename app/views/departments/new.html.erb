@@ -1,6 +1,6 @@
-<% content_for :header_title do %>
-  <%= controller_name.capitalize() %>
-<% end %>
+<%# content_for :header_title do %>
+  <%# controller_name.capitalize() %>
+<%# end %>
 
 <div class="container-fluid mt--6">
     <div class="card mb-4">
@@ -15,3 +15,12 @@
       </div>
     </div>
 </div>
+<!--
+<div class="modal-header border-bottom">
+  <h6 class="modal-title">New Department</h6>
+</div>
+<div class="modal-body">
+  <%= render 'form', department: @department %>
+</div>
+<%= javascript_pack_tag 'form_validation', 'data-turbolinks-track': 'reload' %>
+-->
