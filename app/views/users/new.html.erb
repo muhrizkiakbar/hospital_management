@@ -1,12 +1,63 @@
 <div class="container-fluid mt--6">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="card-wrapper">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card">
           <div class="card-header">
             <h3 class="mb-0">New User</h3>
           </div>
 
           <div class="card-body">
+            <div id="stepper2" class="bs-stepper">
+              <div class="bs-stepper-header" role="tablist">
+                <div class="step active" data-target="#test-nl-1">
+                  <button type="button" class="step-trigger" role="tab" id="stepper2trigger1" aria-controls="test-nl-1" aria-selected="true">
+                    <span class="bs-stepper-circle">
+                      <span class="fas fa-user" aria-hidden="true"></span>
+                    </span>
+                    <span class="bs-stepper-label">Name</span>
+                  </button>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#test-nl-2">
+                  <button type="button" class="step-trigger" role="tab" id="stepper2trigger2" aria-controls="test-nl-2" aria-selected="false">
+                    <span class="bs-stepper-circle">
+                      <span class="fas fa-map-marked" aria-hidden="true"></span>
+                    </span>
+                    <span class="bs-stepper-label">Address</span>
+                  </button>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#test-nl-3">
+                  <button type="button" class="step-trigger" role="tab" id="stepper2trigger3" aria-controls="test-nl-3" aria-selected="false">
+                    <span class="bs-stepper-circle">
+                      <span class="fas fa-save" aria-hidden="true"></span>
+                    </span>
+                    <span class="bs-stepper-label">Submit</span>
+                  </button>
+                </div>
+              </div>
+              <div class="bs-stepper-content">
+                <form onsubmit="return false">
+                  <div id="test-nl-1" role="tabpanel" class="bs-stepper-pane active dstepper-block" aria-labelledby="stepper2trigger1">
+                    <div class="form-group">
+                      <label for="exampleInputName1">Name</label>
+                      <input type="email" class="form-control" id="exampleInputName1" placeholder="Enter your name">
+                    </div>
+                    <button class="btn btn-primary" onclick="stepper2.next()">Next</button>
+                  </div>
+                  <div id="test-nl-2" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper2trigger2">
+                    <div class="form-group">
+                      <label for="exampleInpuAddress1">Address</label>
+                      <input type="email" class="form-control" id="exampleInpuAddress1" placeholder="Enter your address">
+                    </div>
+                    <button class="btn btn-primary" onclick="stepper2.next()">Next</button>
+                  </div>
+                  <div id="test-nl-3" role="tabpanel" class="bs-stepper-pane text-center" aria-labelledby="stepper2trigger3">
+                    <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
             <%= render 'form', user: @user %>
 
             <%= link_to 'Back', users_path, class: "btn btn-neutral" %>
