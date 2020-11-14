@@ -14,7 +14,8 @@ import 'bootstrap';
 require("js-cookie");
 require("jquery.scrollbar");
 require("jquery-scroll-lock");
-require("list.js")
+require("list.js");
+require("bs-stepper");
 // $(document).on('turbolinks:load', function() {
 // import List from "list.js";
 // });
@@ -24,7 +25,6 @@ import '../stylesheets/application';
 import "@fortawesome/fontawesome-free/js/all";
 
 import './custom';
-import './form_validation';
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.

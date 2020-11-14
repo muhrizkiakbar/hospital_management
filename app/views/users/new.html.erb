@@ -1,13 +1,45 @@
 <div class="container-fluid mt--6">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="card-wrapper">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card">
           <div class="card-header">
             <h3 class="mb-0">New User</h3>
           </div>
 
           <div class="card-body">
-            <%= render 'form', user: @user %>
+            <div class="bs-stepper bs-responsive">
+              <div class="bs-stepper-header mb-3" role="tablist">
+                <div class="step active" data-target="#accountContent">
+                  <button type="button" class="step-trigger" role="tab" id="accountBtn" aria-controls="accountContent" aria-selected="true">
+                    <span class="bs-stepper-circle">
+                      <span class="fas fa-user" aria-hidden="true"></span>
+                    </span>
+                    <span class="bs-stepper-label">Account</span>
+                  </button>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#accountProfileContent">
+                  <button type="button" class="step-trigger" role="tab" id="accountProfileBtn" aria-controls="accountProfileContent" aria-selected="false">
+                    <span class="bs-stepper-circle">
+                      <span class="fas fa-map-marked" aria-hidden="true"></span>
+                    </span>
+                    <span class="bs-stepper-label">Account Profile</span>
+                  </button>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#accountAdditionalContent">
+                  <button type="button" class="step-trigger" role="tab" id="accountAdditionalBtn" aria-controls="accountAdditionalContent" aria-selected="false">
+                    <span class="bs-stepper-circle">
+                      <span class="fas fa-save" aria-hidden="true"></span>
+                    </span>
+                    <span class="bs-stepper-label">Account Additional</span>
+                  </button>
+                </div>
+              </div>
+              <div class="bs-stepper-content p-5">
+                <%= render 'form', user: @user %>
+              </div>
+            </div>
 
             <%= link_to 'Back', users_path, class: "btn btn-neutral" %>
           </div>
