@@ -16,3 +16,33 @@
 .active .bs-stepper-circle {
   background-color: $primary;
 }
+
+.bs-stepper.bs-responsive {
+  display: block;
+}
+
+@include media-breakpoint-down(md) {
+  .bs-stepper.bs-responsive {
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .bs-stepper.bs-responsive .bs-stepper-header {
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: stretch;
+        align-items: stretch;
+    margin: 0;
+  }
+
+  .bs-stepper.bs-responsive .bs-stepper-pane:not(.fade),
+  .bs-stepper.bs-responsive .content:not(.fade) {
+    display: block;
+    visibility: hidden;
+  }
+
+  .bs-responsive .bs-stepper-pane.fade.dstepper-none,
+  .bs-responsive .content.fade.dstepper-none {
+    visibility: hidden;
+  }
+}

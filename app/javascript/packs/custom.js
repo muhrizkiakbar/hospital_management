@@ -30,13 +30,13 @@ $(document).on("turbolinks:load", function () {
 });
 
 $(document).on("turbolinks:load", function () {
-  $('a[data-toggle="collapse"][data-page="department"][role="button"][aria-expanded="false"]').on('click', function(e) { 
-    $(this).text(function(i, v) {
+  $('a[data-toggle="collapse"][data-page="department"][role="button"][aria-expanded="false"]').on('click', function (e) {
+    $(this).text(function (i, v) {
       return v === 'Show' ? 'Hide' : 'Show';
     })
   })
 
-  $('#showAll').on('click', function() {
+  $('#showAll').on('click', function () {
     let $buttonCollapse = $('a[data-toggle="collapse"][data-page="department"]');
     let $containerCollapse = $('.collapse.department-collapse');
     if ($(this)[0].checked) {
@@ -50,11 +50,19 @@ $(document).on("turbolinks:load", function () {
         $(this).text('Show')
       })
     }
-    
+
   })
 });
 
-$(document).on("turbolinks:load", function() {
-  const stepper = new Stepper(document.querySelector('.bs-stepper'));
-  
+$(document).on("turbolinks:load", function () {
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    console.log('max width : 768px');
+    $('.bs-stepper').addClass("vertical");
+    $('.bs-stepper-content').removeClass("p-5");
+    $('.bs-stepper-header').removeClass("mb-3");
+  }
+  const stepper = new Stepper(document.querySelector('.bs-stepper'), {linear: false});
+  $('.next-stepper').on("click", function() {
+    stepper.next();
+  });
 });
