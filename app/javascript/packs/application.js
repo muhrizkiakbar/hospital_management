@@ -14,7 +14,8 @@ import 'bootstrap';
 require("js-cookie");
 require("jquery.scrollbar");
 require("jquery-scroll-lock");
-require("list.js")
+require("list.js");
+require("bs-stepper");
 // $(document).on('turbolinks:load', function() {
 // import List from "list.js";
 // });
