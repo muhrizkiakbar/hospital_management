@@ -113,6 +113,14 @@
       <div class="multisteps-form__content">
         <div class="row">
           <div class="form-group col-md-6">
+            <%= form.label :nip, class: "form-control-label" %>
+            <%= form.text_field :nip, class: "form-control" %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= form.label :ktp, class: "form-control-label" %>
+            <%= form.text_field :ktp, class: "form-control" %>
+          </div>
+          <div class="form-group col-md-6">
             <%= form.label :date_birth, class: "form-control-label" %>
             <%= form.text_field :date_birth, class: "form-control datepicker" %>
           </div>
