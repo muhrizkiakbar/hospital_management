@@ -7,43 +7,30 @@
           </div>
 
           <div class="card-body">
-            <div class="bs-stepper bs-responsive">
-              <div class="bs-stepper-header mb-3" role="tablist">
-                <div class="step active" data-target="#accountContent">
-                  <button type="button" class="step-trigger" role="tab" id="accountBtn" aria-controls="accountContent" aria-selected="true">
-                    <span class="bs-stepper-circle">
-                      <span class="fas fa-user" aria-hidden="true"></span>
-                    </span>
-                    <span class="bs-stepper-label">Account</span>
-                  </button>
-                </div>
-                <div class="bs-stepper-line"></div>
-                <div class="step" data-target="#accountProfileContent">
-                  <button type="button" class="step-trigger" role="tab" id="accountProfileBtn" aria-controls="accountProfileContent" aria-selected="false">
-                    <span class="bs-stepper-circle">
-                      <span class="fas fa-map-marked" aria-hidden="true"></span>
-                    </span>
-                    <span class="bs-stepper-label">Account Profile</span>
-                  </button>
-                </div>
-                <div class="bs-stepper-line"></div>
-                <div class="step" data-target="#accountAdditionalContent">
-                  <button type="button" class="step-trigger" role="tab" id="accountAdditionalBtn" aria-controls="accountAdditionalContent" aria-selected="false">
-                    <span class="bs-stepper-circle">
-                      <span class="fas fa-save" aria-hidden="true"></span>
-                    </span>
-                    <span class="bs-stepper-label">Account Additional</span>
-                  </button>
+
+            <!-- Multistep Example -->
+            <div class="multisteps-form">
+              <!--progress bar-->
+              <div class="row">
+                <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
+                  <div class="multisteps-form__progress">
+                    <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">User Account</button>
+                    <button class="multisteps-form__progress-btn" type="button" title="Address">User Profile</button>
+                    <button class="multisteps-form__progress-btn" type="button" title="Order Info">User Detail</button>
+                  </div>
                 </div>
               </div>
-              <div class="bs-stepper-content p-5">
-                <%= render 'form', user: @user %>
+              <!--form panels-->
+              <div class="row">
+                <div class="col m-auto">
+                  <%= render 'form', user: @user %>
+                </div>
               </div>
             </div>
-
-            <%= link_to 'Back', users_path, class: "btn btn-neutral" %>
           </div>
         </div>
       </div>
     </div>
 </div>
+
+<%= javascript_pack_tag 'multistep-form', 'data-turbolinks-track': 'reload' %>

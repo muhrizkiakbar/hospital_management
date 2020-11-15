@@ -3,7 +3,6 @@ $(document).on("turbolinks:load", function () {
   // Example starter JavaScript for disabling form submissions if there are invalid fields
   (function () {
     "use strict";
-    console.log('load form validation');
     window.addEventListener(
       "load",
       function () {
@@ -55,14 +54,22 @@ $(document).on("turbolinks:load", function () {
 });
 
 $(document).on("turbolinks:load", function () {
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    console.log('max width : 768px');
-    $('.bs-stepper').addClass("vertical");
-    $('.bs-stepper-content').removeClass("p-5");
-    $('.bs-stepper-header').removeClass("mb-3");
+  
+  function passwordToggle(toggleBtn) {
+    // console.log(toggleBtn.closest('.input-group-append').siblings('input').attr("type"));
+    let toggleState = toggleBtn.closest('.input-group-append').siblings('input').attr("type");
+    if (toggleState == "text") {
+      toggleBtn.closest('.input-group-append').siblings("input[type='text']").attr("type", "password");
+      toggleBtn.find('.svg-inline--fa').toggleClass("fa-eye");
+      toggleState = false;
+    } else if (toggleState == "password"){
+      toggleBtn.closest('.input-group-append').siblings("input[type='password']").attr("type", "text");
+      toggleBtn.find('.svg-inline--fa').toggleClass("fa-eye-slash");
+      toggleState = true;
+    }
   }
-  const stepper = new Stepper(document.querySelector('.bs-stepper'), {linear: false});
-  $('.next-stepper').on("click", function() {
-    stepper.next();
+
+  $('.show-pass').on("click", function() {
+    passwordToggle($(this));
   });
 });
