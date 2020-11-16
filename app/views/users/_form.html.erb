@@ -81,6 +81,10 @@
               <%= form.label :medical_staff, class: "form-control-label" %>
               <%= form.text_field :medical_staff, class: "form-control", autocomplete: "off" %>
             </div>
+            <div class="form-group">
+              <%= form.label :role, class: "form-control-label" %>
+              <%= form.select(:role_id ,Role.all.collect{|u| [u.name, u.slug]},{prompt: "Choose", disabled: true}, id: '', class:"form-control", required: true) %>
+            </div>
           </div>
           <div class="col-md-6">
             <div class="dropzone dropzone-single dz-clickable h-100" data-toggle="dropzone" data-dropzone-url="/users">
@@ -129,14 +133,14 @@
             <div class="row py-md-2 mb-3">
               <div class="col">
                 <div class="custom-control custom-radio">
-                  <%= form.radio_button :gender, "Laki-Laki", class: "custom-control-input" %>
-                  <%= form.label :gender, "Laki-Laki", class: "custom-control-label", for: "user_gender_laki-laki" %>
+                  <%= form.radio_button :gender, "male", class: "custom-control-input" %>
+                  <%= form.label :gender, "Laki-Laki", class: "custom-control-label", for: "user_gender_male" %>
                 </div>
               </div>
               <div class="col">
                 <div class="custom-control custom-radio">
-                  <%= form.radio_button :gender, "Perempuan", class: "custom-control-input" %>
-                  <%= form.label :gender, "Perempuan", class: "custom-control-label", for: "user_gender_perempuan" %>
+                  <%= form.radio_button :gender, "female", class: "custom-control-input" %>
+                  <%= form.label :gender, "Perempuan", class: "custom-control-label", for: "user_gender_female" %>
                 </div>
               </div>
             </div>
