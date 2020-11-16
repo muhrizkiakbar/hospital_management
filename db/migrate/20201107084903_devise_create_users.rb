@@ -27,7 +27,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.text :address
       t.string :rt_number
       t.string :rw_number
-      t.integer :medical_staff
+      t.string :medical_staff
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
