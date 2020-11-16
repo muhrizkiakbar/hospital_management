@@ -3,3 +3,7 @@
         margin-left: 10px;
     }
 }
+
+.department-collapse.show li.department-group:last-child {
+    padding-bottom: 0 !important;
+}

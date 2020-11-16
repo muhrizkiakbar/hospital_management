@@ -32,7 +32,8 @@
 
 <% if @departments.exists? %>
   <% content_for :new_button do %>
-    <%= link_to 'New', new_department_path, class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
+    <%= link_to 'New', new_department_path, class: "btn btn-sm btn-primary", data: { turbolinks: 'false' } %>
+    <%= link_to 'New Modal', new_department_path, remote: true, class: "btn btn-sm btn-primary", data: { toggle: 'modal', target: "#department-modal" } %>
   <% end %>
 <% end %>
 
@@ -40,77 +41,252 @@
   <div class="row">
     <div class="col">
       <div class="card">
-        <div class="card-body p-0">
-          <% if @departments.exists? %>
-          <div  class="table-responsive"
-                data-toggle="list"
-                data-list-values='[<% (1..(@departments.first.attributes.length - 6)).each do |v| %>"<%= @departments.first.attributes.keys[v] %>"<%= (v==@departments.first.attributes.length - 6) ? "" : "," %><% end %>]'>
-            <input type="hidden" class="search" />
-            <table class="table align-items-center table-flush table-striped">
-              <thead class="thead-light">
-                <tr>
-                  <% (1..(@departments.first.attributes.length - 6)).each do |v| %>
-                      <th scope="col" class="sort" data-sort="<%= @departments.first.attributes.keys[v] %>">
-                        <%= @departments.first.attributes.keys[v].sub('_', ' ') %>
-                      </th>
-                  <% end %>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody class="list">
-                <% @departments.each do |department| %>
-                  <tr>
-                    <td class="<%= department.attributes.keys[1] %>"><%= department.name %></td>
-                    <%= link_to 'New', new_department_path(parent: department.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
-                    <% department.child_id.where(" current_level=2").each do |department2| %>
-                      <%= department2.name%> <br>
-                      <%= link_to 'New', new_department_path(parent: department2.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
-                        <% department2.child_id.where(" current_level=3").each do |department3| %>
-                          <%= department3.name%> <br>
-                            <%= link_to 'New', new_department_path(parent: department3.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
-                            <% department3.child_id.where(" current_level=4").each do |department4| %>
-                              <%= department4.name%> <br>
-                              <%= link_to 'New', new_department_path(parent: department4.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
-                                <% department4.child_id.where(" current_level=5").each do |department5| %>
-                                  <%= department5.name%> <br>
-                                  <%= link_to 'New', new_department_path(parent: department5.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
-                                    <% department5.child_id.where(" current_level=6").each do |department6| %>
-                                      <%= department6.name%> <br>
-                                      <%= link_to 'New', new_department_path(parent: department6.slug), class: "btn btn-sm btn-neutral", data: { turbolinks: 'false' } %>
-                                      
-                                    <%end%>
-                                <%end%>
-                            <%end%>
-                        <%end%>
-                    <%end%>
-                    <td class="text-right <%= department.attributes.keys[2] %>"><%= department.current_level %></td>
-                    <td class="text-right <%= department.attributes.keys[3] %>"><%= department.level1 %></td>
-                    <td class="text-right <%= department.attributes.keys[4] %>"><%= department.level2 %></td>
-                    <td class="text-right <%= department.attributes.keys[5] %>"><%= department.level3 %></td>
-                    <td class="text-right <%= department.attributes.keys[6] %>"><%= department.level4 %></td>
-                    <td class="text-right <%= department.attributes.keys[7] %>"><%= department.level5 %></td>
-                    <td class="text-right <%= department.attributes.keys[8] %>"><%= department.level6 %></td>
-                    <td class="text-left <%= department.attributes.keys[9] %>"><%= department.path %></td>
-                    <td class="text-right">
+        <div class="card-header">
+          <div class="row justify-content-between align-items-center">
+            <div class="col">
+              <h5 class="h3 mb-0"><%= controller_name.capitalize() %></h5>
+            </div>
+            <div class="col-auto">
+              <div class="d-flex align-items-center">
+                <small class="text-primary font-weight-bold mr-3">Show All</small>
+                <label class="custom-toggle custom-toggle-primary">
+                  <input type="checkbox" id="showAll">
+                  <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush list my--3">
+            <% if @departments.exists? %>
+              <!-- Department1 -->
+              <% @departments.each do |department| %>
+                <li class="list-group-item px-0 department-group">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h4 class="mb-0">
+                        <%= department.name %>
+                      </h4>
+                    </div>
+                    <div class="col-auto">
                       <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" style="">
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <%= link_to 'New', new_department_path(parent: department.slug), class: "dropdown-item", data: { turbolinks: 'false' } %>
                           <%= link_to "Detail", department, class: "dropdown-item", data: { turbolinks: 'false' } %>
                           <%= link_to "Edit", edit_department_path(department), class: "dropdown-item" %>
-                          <%= link_to "Show", department_path(department), class: "dropdown-item" %>
+                          <%# link_to "Show", department_path(department), class: "dropdown-item" %>
+                          <a  class="dropdown-item"
+                              href="#child-<%= department.slug %>"
+                              data-toggle="collapse"
+                              role="button"
+                              aria-expanded="false"
+                              aria-controls="child-<%= department.slug %>"
+                              data-page="department"
+                              data-turbolinks="false"
+                          >Show</a>
                         </div>
                       </div>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-          <% end %>
+                    </div>
+                  </div>
+                  <div class="collapse ml-3 department-collapse" id="child-<%= department.slug %>">
+                    <ul class="list-group list-group-flush list mb-0">
+                      <!-- Department2 -->
+                      <% department.child_id.where("current_level=2").each do |department2| %>
+                      <li class="list-group-item px-0 department-group">
+                        <div class="row align-items-center">
+                          <div class="col">
+                            <h4 class="mb-0">
+                              <%= department2.name %>
+                            </h4>
+                          </div>
+                          <div class="col-auto">
+                            <div class="dropdown">
+                              <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                              </a>
+                              <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                <%= link_to 'New', new_department_path(parent: department2.slug), class: "dropdown-item", data: { turbolinks: 'false' } %>
+                                <%= link_to "Detail", department2, class: "dropdown-item", data: { turbolinks: 'false' } %>
+                                <%= link_to "Edit", edit_department_path(department2), class: "dropdown-item" %>
+                                <%# link_to "Show", department_path(department), class: "dropdown-item" %>
+                                <a  class="dropdown-item"
+                                    href="#child-<%= department2.slug %>"
+                                    data-toggle="collapse"
+                                    role="button"
+                                    aria-expanded="false"
+                                    aria-controls="child-<%= department2.slug %>"
+                                    data-page="department"
+                                    data-turbolinks="false"
+                                >Show</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="collapse ml-3 department-collapse" id="child-<%= department2.slug %>">
+                          <ul class="list-group list-group-flush list mb-0">
+                            <!-- Department3 -->
+                            <% department2.child_id.where("current_level=3").each do |department3| %>
+                            <li class="list-group-item px-0 department-group">
+                              <div class="row align-items-center">
+                                <div class="col">
+                                  <h4 class="mb-0">
+                                    <%= department3.name %>
+                                  </h4>
+                                </div>
+                                <div class="col-auto">
+                                  <div class="dropdown">
+                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                      <%= link_to 'New', new_department_path(parent: department3.slug), class: "dropdown-item", data: { turbolinks: 'false' } %>
+                                      <%= link_to "Detail", department3, class: "dropdown-item", data: { turbolinks: 'false' } %>
+                                      <%= link_to "Edit", edit_department_path(department3), class: "dropdown-item" %>
+                                      <%# link_to "Show", department_path(department), class: "dropdown-item" %>
+                                      <a  class="dropdown-item"
+                                          href="#child-<%= department3.slug %>"
+                                          data-toggle="collapse"
+                                          role="button"
+                                          aria-expanded="false"
+                                          aria-controls="child-<%= department3.slug %>"
+                                          data-page="department"
+                                          data-turbolinks="false"
+                                      >Show</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="collapse ml-3 department-collapse" id="child-<%= department3.slug %>">
+                                <ul class="list-group list-group-flush list mb-0">
+                                  <!-- Department4 -->
+                                  <% department3.child_id.where("current_level=4").each do |department4| %>
+                                  <li class="list-group-item px-0 department-group">
+                                    <div class="row align-items-center">
+                                      <div class="col">
+                                        <h4 class="mb-0">
+                                          <%= department4.name %>
+                                        </h4>
+                                      </div>
+                                      <div class="col-auto">
+                                        <div class="dropdown">
+                                          <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                          </a>
+                                          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                            <%= link_to 'New', new_department_path(parent: department4.slug), class: "dropdown-item", data: { turbolinks: 'false' } %>
+                                            <%= link_to "Detail", department4, class: "dropdown-item", data: { turbolinks: 'false' } %>
+                                            <%= link_to "Edit", edit_department_path(department4), class: "dropdown-item" %>
+                                            <%# link_to "Show", department_path(department), class: "dropdown-item" %>
+                                            <a  class="dropdown-item"
+                                                href="#child-<%= department4.slug %>"
+                                                data-toggle="collapse"
+                                                role="button"
+                                                aria-expanded="false"
+                                                aria-controls="child-<%= department4.slug %>"
+                                                data-page="department"
+                                                data-turbolinks="false"
+                                            >Show</a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="collapse ml-3 department-collapse" id="child-<%= department4.slug %>">
+                                      <ul class="list-group list-group-flush list mb-0">
+                                        <!-- Department5 -->
+                                        <% department4.child_id.where("current_level=5").each do |department5| %>
+                                        <li class="list-group-item px-0 department-group">
+                                          <div class="row align-items-center">
+                                            <div class="col">
+                                              <h4 class="mb-0">
+                                                <%= department5.name %>
+                                              </h4>
+                                            </div>
+                                            <div class="col-auto">
+                                              <div class="dropdown">
+                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                  <i class="fas fa-ellipsis-v"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                  <%= link_to 'New', new_department_path(parent: department5.slug), class: "dropdown-item", data: { turbolinks: 'false' } %>
+                                                  <%= link_to "Detail", department5, class: "dropdown-item", data: { turbolinks: 'false' } %>
+                                                  <%= link_to "Edit", edit_department_path(department5), class: "dropdown-item" %>
+                                                  <%# link_to "Show", department_path(department), class: "dropdown-item" %>
+                                                  <a  class="dropdown-item"
+                                                      href="#child-<%= department5.slug %>"
+                                                      data-toggle="collapse"
+                                                      role="button"
+                                                      aria-expanded="false"
+                                                      aria-controls="child-<%= department5.slug %>"
+                                                      data-page="department"
+                                                      data-turbolinks="false"
+                                                  >Show</a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="collapse ml-3 department-collapse" id="child-<%= department5.slug %>">
+                                            <ul class="list-group list-group-flush list mb-0">
+                                              <!-- Department6 -->
+                                              <% department5.child_id.where("current_level=6").each do |department6| %>
+                                              <li class="list-group-item px-0 department-group">
+                                                <div class="row align-items-center">
+                                                  <div class="col">
+                                                    <h4 class="mb-0">
+                                                      <%= department6.name %>
+                                                    </h4>
+                                                  </div>
+                                                  <div class="col-auto">
+                                                    <div class="dropdown">
+                                                      <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                      </a>
+                                                      <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <%= link_to 'New', new_department_path(parent: department6.slug), class: "dropdown-item", data: { turbolinks: 'false' } %>
+                                                        <%= link_to "Detail", department6, class: "dropdown-item", data: { turbolinks: 'false' } %>
+                                                        <%= link_to "Edit", edit_department_path(department6), class: "dropdown-item" %>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </li>
+                                              <% end %>
+                                            </ul>
+                                          </div>
+                                        </li>
+                                        <% end %>
+                                      </ul>
+                                    </div>
+                                  </li>
+                                  <% end %>
+                                </ul>
+                              </div>
+                            </li>
+                            <% end %>
+                          </ul>
+                        </div>
+                      </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
         </div>
       </div>
+    </div>
+  </div>
+
+  
+</div>
+
+<div class="modal fade" id="department-modal" tabindex="-1" role="dialog" aria-labeledby="department-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
     </div>
   </div>
 </div>
