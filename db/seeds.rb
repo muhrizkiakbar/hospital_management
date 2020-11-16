@@ -7,11 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #
 
-Dir[File.join(Rails.root, 'db', 'seeds/user', '*.rb')].sort.each do |seed|
-    load seed
-end
 
 
 Dir[File.join(Rails.root, 'db', 'seeds/department', '*.rb')].sort.each do |seed|
+    load seed
+end
+
+Dir[File.join(Rails.root, 'db', 'seeds/user', '*.rb')].sort.each do |seed|
     load seed
 end
