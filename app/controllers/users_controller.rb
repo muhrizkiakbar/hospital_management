@@ -111,6 +111,7 @@ class UsersController < ApplicationController
 
     def set_request_foreign
       @role = Role.friendly.find(params[:user][:role_id])
+      @department = Department.friendly.find(params[:user][:department_id])
     end
 
     # Only allow a list of trusted parameters through.

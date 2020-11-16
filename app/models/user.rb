@@ -34,6 +34,7 @@
 #  slug                   :string
 #  deleted_at             :datetime
 #  role_id                :bigint           not null
+#  department_id          :bigint           not null
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -49,6 +50,7 @@ class User < ApplicationRecord
 
   #relasi
   belongs_to :role
+  belongs_to :department
 
   #setting paginasi
   paginates_per 30
