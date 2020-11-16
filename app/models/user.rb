@@ -49,6 +49,7 @@ class User < ApplicationRecord
 
   #relasi
   belongs_to :role
+  belongs_to :department
 
   #setting paginasi
   paginates_per 30
