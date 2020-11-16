@@ -1685,6 +1685,7 @@ $(document).on('turbolinks:load', function() {
 				url: $this.data('dropzone-url'),
 				thumbnailWidth: null,
 				thumbnailHeight: null,
+				autoProcessQueue: false,
 				previewsContainer: preview.get(0),
 				previewTemplate: preview.html(),
 				maxFiles: (!multiple) ? 1 : null,

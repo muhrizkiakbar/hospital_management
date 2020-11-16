@@ -1,17 +1,36 @@
 <div class="container-fluid mt--6">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="card-wrapper">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card">
           <div class="card-header">
             <h3 class="mb-0">New User</h3>
           </div>
 
           <div class="card-body">
-            <%= render 'form', user: @user %>
 
-            <%= link_to 'Back', users_path, class: "btn btn-neutral" %>
+            <!-- Multistep Example -->
+            <div class="multisteps-form">
+              <!--progress bar-->
+              <div class="row">
+                <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
+                  <div class="multisteps-form__progress">
+                    <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">User Account</button>
+                    <button class="multisteps-form__progress-btn" type="button" title="Address">User Profile</button>
+                    <button class="multisteps-form__progress-btn" type="button" title="Order Info">User Detail</button>
+                  </div>
+                </div>
+              </div>
+              <!--form panels-->
+              <div class="row">
+                <div class="col m-auto">
+                  <%= render 'form', user: @user %>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 </div>
+
+<%= javascript_pack_tag 'multistep-form', 'data-turbolinks-track': 'reload' %>

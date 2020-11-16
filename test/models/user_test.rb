@@ -34,6 +34,7 @@
 #  slug                   :string
 #  deleted_at             :datetime
 #  role_id                :bigint           not null
+#  department_id          :bigint           not null
 #
 require 'test_helper'
 

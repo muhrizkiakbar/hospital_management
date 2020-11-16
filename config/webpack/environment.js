@@ -8,6 +8,7 @@ environment.plugins.prepend('Provide',
         jQuery: 'jquery',
         Cookies: 'jsCookies',
         List: 'list.js',
+        Dropzone: 'jsDropzone',
         Popper: ['popper.js', 'default']
     })
 )
@@ -16,6 +17,7 @@ const config = environment.toWebpackConfig();
 config.resolve.alias = {
     jquery: 'jquery/src/jquery',
     jsCookies: 'js-cookie/src/js.cookie',
+    jsDropzone: 'dropzone/dist/dropzone.js'
     // listjs: 'list.js/dist/list'
 }
 
