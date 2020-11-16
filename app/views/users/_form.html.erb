@@ -79,7 +79,7 @@
             </div>
             <div class="form-group">
               <%= form.label :medical_staff, class: "form-control-label" %>
-              <%= form.text_field :medical_staff, class: "form-control", autocomplete: "off" %>
+              <%= form.select :medical_staff, options_for_select([["Choose", ""], ["Non Medic", "nonmedic"], ["Functional Medic", "functionalmedic"]]), {}, class: "form-control" %>
             </div>
             <div class="form-group">
               <%= form.label :role, class: "form-control-label" %>
