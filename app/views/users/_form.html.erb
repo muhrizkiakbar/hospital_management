@@ -60,7 +60,7 @@
       <h3 class="multisteps-form__title mb-3">Your Profile</h3>
       <div class="multisteps-form__content">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-xl-6">
             <div class="form-group">
               <%= form.label :honorific, "Title", class: "form-control-label" %>
               <%= form.select :honorific, options_for_select([["Choose Title", ""], "Tn", "Ny"]), {},class: "form-control" %>
@@ -79,14 +79,18 @@
             </div>
             <div class="form-group">
               <%= form.label :medical_staff, class: "form-control-label" %>
-              <%= form.select :medical_staff, options_for_select([["Choose", ""], ["Non Medic", "nonmedic"], ["Functional Medic", "functionalmedic"]]), {}, class: "form-control" %>
+              <%= form.select :medical_staff, options_for_select([["Choose", ""], ["Non Medic", "nonmedis"], ["Functional Medic", "functionalmedic"]]), {}, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :department_id, class: "form-control-label" %>
+              <%= form.select(:department_id ,Department.all.collect{|u| [u.name, u.slug]},{prompt: "Choose", disabled: true}, id: '', class:"form-control", required: true) %>
             </div>
             <div class="form-group">
               <%= form.label :role, class: "form-control-label" %>
               <%= form.select(:role_id ,Role.all.collect{|u| [u.name, u.slug]},{prompt: "Choose", disabled: true}, id: '', class:"form-control", required: true) %>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-xl-6 py-xl-4">
             <div class="dropzone dropzone-single dz-clickable h-100" data-toggle="dropzone" data-dropzone-url="/users">
                 <div class="fallback">
                   <div class="custom-file">
