@@ -53,7 +53,8 @@ class User < ApplicationRecord
   #setting paginasi
   paginates_per 30
 
-  enum gender: {Male: "male", Female: "female"}
+  enum gender: {male: "Male", female: "Female"}
+  enum medical_staff: [ 'Non Medis', 'Functional Medic' ]
 
   # pakai gem paperclip gasan meupload gambar
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/default_user.png"
@@ -68,10 +69,24 @@ class User < ApplicationRecord
 
   validates :nip, :ktp, :first_name, :last_name, :academic_degree, :date_birth, :gender, :postal_code,
             :address, :rt_number, :rw_number, :medical_staff, presence: true
-  validates :first_name, :last_name, :gender, :medical_staff, :format => { :with => /\A[a-zA-Z]+\z/, :message => "Only letters allowed." }
+  validates :first_name, :last_name, :gender, :format => { :with => /\A[a-zA-Z]+\z/, :message => "Only letters allowed." }
   validates :nip,:ktp, :postal_code, :rt_number,:rw_number, :format => { :with => /\A[0-9]*\z/, :message => "Only numbers allowed." }
   validates :slug,     uniqueness: true
   validates :gender, inclusion: %w(male female)
+
+  #gasan memanggil data references yang terhapus, jadi
+  #jadi jika data relasi terhapus maka tetap bisa diambil datanya
+  
+  def role
+    Role.unscoped {super}
+  end
+
+
+  
+  #gasan ransack
+  def self.search options
+    self.ransack(options)
+  end
 
 
   #function gasan login

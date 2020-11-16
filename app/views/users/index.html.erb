@@ -1,32 +1,18 @@
-<!-- Add this to add search form -->
 <% content_for :search_form do %>
-  <!-- Search form -->
-  <!-- Add Class searchList on input element to enable search with List.js -->
-  <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-  <div class="form-group mb-0">
-      <div class="input-group input-group-alternative input-group-merge">
-      <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fas fa-search"></i></span>
+  <%= search_form_for @search, url: users_path, class: "navbar-search navbar-search-dark form-inline mr-sm-3", id: "navbar-search-main" do |f| %>
+      <div class="form-group mb-0">
+          <div class="input-group input-group-alternative input-group-merge">
+              <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+              </div>
+              <!-- <input class="form-control" placeholder="Search" type="text"> -->
+              <%= f.search_field :username_or_name_or_email_or_role_name_cont, class: "form-control", placeholder: "Cari ...", autocomplete: "off" %>
+          </div>
       </div>
-      <input class="form-control searchList" placeholder="Search" type="text">
-      </div>
-  </div>
-  <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-      <span aria-hidden="true">×</span>
-  </button>
-  </form>
-<% end %>
-<% content_for :search_show do  %>
-  <li class="nav-item d-sm-none">
-      <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-      <i class="ni ni-zoom-split-in"></i>
-      </a>
-  </li>
-<% end %>
-<!-- -->
-
-<% content_for :new_button do %>
-  <%= link_to 'New', new_user_path, class: "btn btn-sm btn-primary", data: { turbolinks: 'false' } %>
+      <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+          <span aria-hidden="true">×</span>
+      </button>
+  <% end %>
 <% end %>
 
 <div class="container-fluid mt--6">
