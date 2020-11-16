@@ -18,6 +18,7 @@ roles.each do |role|
         gender_downcase = Faker::Gender.binary_type
         user = User.create(
           role: add_role,
+          department: department,
           email: Faker::Internet.email,
           username: Faker::Name.initials,
           password: "password123",
