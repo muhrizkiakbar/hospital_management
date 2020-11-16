@@ -14,7 +14,10 @@ import 'bootstrap';
 require("js-cookie");
 require("jquery.scrollbar");
 require("jquery-scroll-lock");
-require("list.js")
+require("bootstrap-datepicker");
+require("list.js");
+require("dropzone");
+Dropzone.autoDiscover = false;
 // $(document).on('turbolinks:load', function() {
 // import List from "list.js";
 // });
@@ -24,7 +27,7 @@ import '../stylesheets/application';
 import "@fortawesome/fontawesome-free/js/all";
 
 import './custom';
-import './form_validation';
+// import './multistep-form';
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.

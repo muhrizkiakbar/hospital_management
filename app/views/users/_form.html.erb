@@ -1,15 +1,193 @@
-<%= form_with(model: user, url: users_path, html: {multipart: true}) do |form| %>
+<%= form_with(
+  model: user, 
+  url: users_path, 
+  html: {
+    multipart: true, 
+    class: "needs-validation #{ params[:action] === 'new' ? 'multisteps-form__form' : ''}",
+    novalidate: "novalidate"
+  }
+) do |form| %>
   <%= render "error_messages", resource: form.object %>
-
-  <%= form.file_field :avatar, as: :file %>  
-
-<div class="row">
-        <div class="col-md-6 flex justify-between items-center">
-        <%= form.button class: "btn btn-default" %>
-
-        <% if form.object.persisted? %>
-        <%= link_to 'Delete', form.object, class: "btn btn-default", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
-        <% end %>
+  <% if params[:action] == 'new' %>
+    <!--single form panel-->
+    <div class="multisteps-form__panel p-4 rounded js-active" data-animation="scaleIn">
+      <h3 class="multisteps-form__title mb-3">Your Account</h3>
+      <div class="multisteps-form__content">
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <%= form.label :username, class: "form-control-label" %>
+            <%= form.text_field :username, class: "form-control", required: "required", autocomplete: "off" %>
+          </div>
+          <div class="form-group col-sm-6">
+            <%= form.label :email, class: "form-control-label" %>
+            <%= form.email_field :email, class: "form-control", required: "required", autocomplete: "off" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <%= form.label :password, class: "form-control-label" %>
+              <div class="input-group">
+                <%= form.password_field :password, class: "form-control", required: "required"%>
+                <div class="input-group-append">
+                  <span class="input-group-text show-pass">
+                    <i class="fas fa-eye"></i>
+                  </span>
+                </div>
+              </div>
+            
+          </div>
+          <div class="form-group col-sm-6">
+            <%= form.label :password_confirmation, "Repeat Password", class: "form-control-label" %>
+              <div class="input-group">
+                <%= form.password_field :password_confirmation, class: "form-control", required: "required"%>
+                <div class="input-group-append">
+                  <span class="input-group-text show-pass">
+                    <i class="fas fa-eye"></i>
+                  </span>
+                </div>
+              </div>
+            
+          </div>
+        </div>
+        <div class="button-row d-flex mt-4">
+          <%= link_to 'Back', users_path, class: "btn btn-primary", data: {turbolinks: 'false'} %>
+          <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+        </div>
+      </div>
     </div>
-</div>
+    <!--single form panel-->
+    <div class="multisteps-form__panel p-4 rounded" data-animation="scaleIn">
+      <h3 class="multisteps-form__title mb-3">Your Profile</h3>
+      <div class="multisteps-form__content">
+        <div class="row">
+          <div class="col-xl-6">
+            <div class="form-group">
+              <%= form.label :honorific, "Title", class: "form-control-label" %>
+              <%= form.select :honorific, options_for_select([["Choose Title", ""], "Tn", "Ny"]), {},class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :first_name, class: "form-control-label" %>
+              <%= form.text_field :first_name, class: "form-control", required: "required", autocomplete: "off" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :last_name, class: "form-control-label" %>
+              <%= form.text_field :last_name, class: "form-control", required: "required", autocomplete: "off" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :academic_degree, class: "form-control-label" %>
+              <%= form.text_field :academic_degree, class: "form-control", autocomplete: "off" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :medical_staff, class: "form-control-label" %>
+              <%= form.select :medical_staff, options_for_select([["Choose", ""], ["Non Medic", "nonmedis"], ["Functional Medic", "functionalmedic"]]), {}, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :department_id, class: "form-control-label" %>
+              <%= form.select(:department_id ,Department.all.collect{|u| [u.name, u.slug]},{prompt: "Choose", disabled: true}, id: '', class:"form-control", required: true) %>
+            </div>
+            <div class="form-group">
+              <%= form.label :role, class: "form-control-label" %>
+              <%= form.select(:role_id ,Role.all.collect{|u| [u.name, u.slug]},{prompt: "Choose", disabled: true}, id: '', class:"form-control", required: true) %>
+            </div>
+          </div>
+          <div class="col-xl-6 py-xl-4">
+            <div class="dropzone dropzone-single dz-clickable h-100" data-toggle="dropzone" data-dropzone-url="/users">
+                <div class="fallback">
+                  <div class="custom-file">
+                    <%= form.file_field :avatar, as: :file, class: "custom-file-input" %>
+                    <%= form.label :avatar, class: "custom-file-label" %>
+                  </div>
+                </div>
+                <div class="dz-preview dz-preview-single">
+                  <div class="dz-preview-cover">
+                      <img class="dz-preview-img" src="" alt="" data-dz-thumbnail>
+                  </div>
+                </div>
+                <div class="dz-default dz-message h-100 dz-newuserform align-items-center">
+                  <span>Drop your photo here</span>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="button-row d-flex mt-4">
+          <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+          <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+        </div>
+      </div>
+    </div>
+    <!--single form panel-->
+    <div class="multisteps-form__panel p-4 rounded" data-animation="scaleIn">
+      <h3 class="multisteps-form__title mb-3">Your Detail Info</h3>
+      <div class="multisteps-form__content">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <%= form.label :nip, class: "form-control-label" %>
+            <%= form.text_field :nip, class: "form-control" %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= form.label :ktp, class: "form-control-label" %>
+            <%= form.text_field :ktp, class: "form-control" %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= form.label :date_birth, class: "form-control-label" %>
+            <%= form.text_field :date_birth, class: "form-control datepicker" %>
+          </div>
+          <div class="col-md-6">
+            <label for="" class="form-control-label">Gender</label>
+            <div class="row py-md-2 mb-3">
+              <div class="col">
+                <div class="custom-control custom-radio">
+                  <%= form.radio_button :gender, "male", class: "custom-control-input" %>
+                  <%= form.label :gender, "Laki-Laki", class: "custom-control-label", for: "user_gender_male" %>
+                </div>
+              </div>
+              <div class="col">
+                <div class="custom-control custom-radio">
+                  <%= form.radio_button :gender, "female", class: "custom-control-input" %>
+                  <%= form.label :gender, "Perempuan", class: "custom-control-label", for: "user_gender_female" %>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <div class="form-group col-md-6">
+            <%= form.label :address, class: "form-control-label" %>
+            <%= form.text_area :address, class: "form-control", style: "height: 139px;" %>
+          </div>
+          <div class="form-group col-md-6">
+            <div class="row mb-3">
+              <div class="col">
+                <%= form.label :rt, class: "form-control-label" %>
+                <%= form.text_field :rt, class: "form-control" %>
+              </div>
+              <div class="col">
+                <%= form.label :rw, class: "form-control-label" %>
+                <%= form.text_field :rw, class: "form-control" %>
+              </div>
+            </div>
+            <%= form.label :postal_code, class: "form-control-label" %>
+            <%= form.text_field :postal_code, class: "form-control" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="button-row d-flex mt-4 col-12">
+            <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+            <%= form.button class: "btn btn-primary ml-auto" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+    
+
+<!--div class="row">
+        <div class="col-md-6 flex justify-between items-center">
+        <%# form.button class: "btn btn-default" %>
+
+        <%# if form.object.persisted? %>
+        <%# link_to 'Delete', form.object, class: "btn btn-default", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
+        <%# end %>
+    </div>
+</div-->
 <% end %>
