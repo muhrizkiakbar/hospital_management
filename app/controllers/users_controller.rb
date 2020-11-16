@@ -9,9 +9,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    #@search = User.ransack(params[:q])
-    #@users = @search.result(distinct: true)
-    @users = User.all
+    @search = User.ransack(params[:q])
+    @users = @search.result(distinct: true)
+    #@users = User.all
   end
 
   # GET /users/1

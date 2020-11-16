@@ -55,7 +55,7 @@ class User < ApplicationRecord
   paginates_per 30
 
   enum gender: {male: "Male", female: "Female"}
-  enum medical_staff: [ 'Non Medis', 'Functional Medic' ]
+  enum medical_staff: { nonmedic: 'Non Medis', functionalmedic: 'Functional Medic' }
 
   # pakai gem paperclip gasan meupload gambar
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/default_user.png"
